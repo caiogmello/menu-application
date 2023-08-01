@@ -23,6 +23,18 @@ public class FoodController {
         repository.save(foodData);
     }
 
+    @PutMapping("{id}")
+    public void updateFood(@PathVariable Long id, @RequestBody FoodRequestDTO data) {
+        Food food =  repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Food not exist with id: " + id));
+
+        food.setTitle(data.title());
+        food.setImage(data.image());
+        food.setPrice(data.price());
+
+        repository.save(food);
+    }
+
     @CrossOrigin(origins = "*")
     @GetMapping
     public List<FoodResponseDTO> getAll() {
