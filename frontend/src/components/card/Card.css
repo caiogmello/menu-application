@@ -4,11 +4,11 @@
     align-items: center;
     justify-content: center;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;    
-    background-color: rgb(17, 158, 102);
+    background-color: rgb(85, 32, 9);
     border-radius: 8px;
     line-height: 1;
 }
-    
+
 .card img {
     border-radius: 8px 8px 0px 0px;
     width: 250px;

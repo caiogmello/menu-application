@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 const API_URL = "http://localhost:8080";
 
 const postData = async (data: FoodData): AxiosPromise<unknown> => {
-  const response = axios.post(API_URL, data);
+  const response = axios.post(API_URL + "/food", data);
   return response;
 };
 

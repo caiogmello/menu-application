@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useFoodDataMutate } from "../../hooks/useFoodDataMutate";
 import { FoodData } from "../../interface/FoodData";
+import "./modal.css"
 
 interface InputProps {
   label: string;
@@ -20,7 +21,12 @@ const Input = ({ label, value, updateValue }: InputProps) => {
   );
 };
 
-export function CreateModal() {
+
+interface ModalProps {
+    closeModal(): void
+}
+
+export function CreateModal({ closeModal }: ModalProps) {
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState(0.0);
     const [image, setImage] = useState("");
@@ -34,11 +40,15 @@ export function CreateModal() {
         }
 
         mutate(foodData);
+        closeModal();
     }
   return (
     <div className="modal-overlay">
       <div className="modal-body">
-        <h2>Register a new food on menu:</h2>
+        <div className="top">
+            <h2>Register a new food on menu</h2>
+            <button onClick={closeModal}>X</button>
+        </div>
         <form className="input-container">
           <Input label="title" value={title} updateValue={setTitle}></Input>
           <Input label="price" value={price} updateValue={setPrice}></Input>

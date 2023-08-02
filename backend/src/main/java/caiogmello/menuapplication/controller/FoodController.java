@@ -16,7 +16,7 @@ public class FoodController {
     @Autowired
     private FoodRepository repository;
 
-    @CrossOrigin(origins = "*")
+//    @CrossOrigin()
     @PostMapping
     public void postFood(@RequestBody FoodRequestDTO data) {
         Food foodData = new Food(data);
@@ -35,10 +35,18 @@ public class FoodController {
         repository.save(food);
     }
 
-    @CrossOrigin(origins = "*")
+//    @CrossOrigin()
     @GetMapping
     public List<FoodResponseDTO> getAll() {
         List<FoodResponseDTO> foodList = repository.findAll().stream().map(FoodResponseDTO::new).toList();
         return foodList;
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteFood(@PathVariable Long id){
+        Food food =  repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Food not exist with id: " + id));
+
+        repository.delete(food);
     }
 }
